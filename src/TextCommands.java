@@ -43,20 +43,20 @@ public class TextCommands {
     public void groupCount() {
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
         Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            uniqueSet.add(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            uniqueSet.add(changedArrayOfWords.get(position));
         }
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
-        int counter;
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            counter=0;
-            for(int j=0;j<arrayOfWords.size();j++){
-                if(changedArrayOfWords.get(i).equals(arrayOfWords.get(j))){
-                    counter++;
+        int wordsCounter;
+        for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
+            wordsCounter = 0;
+            for (int position2 = 0; position2 < arrayOfWords.size(); position2++) {
+                if (changedArrayOfWords.get(position1).equals(arrayOfWords.get(position2))) {
+                    wordsCounter++;
                 }
             }
-            System.out.println(changedArrayOfWords.get(i) + " " + counter);
+            System.out.println(changedArrayOfWords.get(position1) + " " + wordsCounter);
         }
     }
 
@@ -78,8 +78,8 @@ public class TextCommands {
     public void countDistinct() {
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
         Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            uniqueSet.add(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            uniqueSet.add(changedArrayOfWords.get(position));
         }
         System.out.println(uniqueSet.size());
 
@@ -88,14 +88,14 @@ public class TextCommands {
     public void sort() {
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
         Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            uniqueSet.add(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            uniqueSet.add(changedArrayOfWords.get(position));
         }
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
         Collections.sort(changedArrayOfWords);
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            System.out.println(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            System.out.println(changedArrayOfWords.get(position));
         }
     }
 
@@ -103,28 +103,39 @@ public class TextCommands {
 
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
         Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            uniqueSet.add(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            uniqueSet.add(changedArrayOfWords.get(position));
         }
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
         Collections.sort(changedArrayOfWords);
-        for (int i = changedArrayOfWords.size() -1 ; i >= 0; i--) {
-            System.out.println(changedArrayOfWords.get(i));
+        for (int position = changedArrayOfWords.size() - 1; position >= 0; position--) {
+            System.out.println(changedArrayOfWords.get(position));
         }
     }
 
     public void sortBySize() {
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
         Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            uniqueSet.add(changedArrayOfWords.get(i));
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            uniqueSet.add(changedArrayOfWords.get(position));
         }
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
         Collections.sort(changedArrayOfWords);
-        for (int i = 0; i < changedArrayOfWords.size(); i++) {
-            System.out.println(changedArrayOfWords.get(i));
+        String bufer;
+        for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
+            for (int position2 = 0; position2 < changedArrayOfWords.size() - 1; position2++) {
+                if (changedArrayOfWords.get(position1).length() > changedArrayOfWords.get(position2).length()) {
+                    bufer = changedArrayOfWords.get(position2);
+                    changedArrayOfWords.get(position2).equals(changedArrayOfWords.get(position1));
+                    changedArrayOfWords.get(position1).equals(bufer);
+                }
+            }
+        }
+        for (int position = 0; position < changedArrayOfWords.size(); position++) {
+
+            System.out.println(changedArrayOfWords.get(position));
         }
     }
 
