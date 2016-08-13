@@ -1,4 +1,6 @@
+import javax.management.ObjectName;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class TextCommands {
@@ -6,8 +8,7 @@ public class TextCommands {
     String[] text = new String[10];
     int quantityOfStrings;
     int wordPositionToAdd = 0;
-    ArrayList<String> arrayOfWords=new ArrayList<String>();
-    ArrayList<String> changedArrayOfWords=new ArrayList<String>();
+    ArrayList<String> arrayOfWords = new ArrayList<String>();
     int[] numberOfWords;
     int elementPos = 0;
 
@@ -40,6 +41,23 @@ public class TextCommands {
     }
 
     public void groupCount() {
+        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        Set<String> uniqueSet = new LinkedHashSet<String>();
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            uniqueSet.add(changedArrayOfWords.get(i));
+        }
+        changedArrayOfWords.clear();
+        changedArrayOfWords.addAll(uniqueSet);
+        int counter;
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            counter=0;
+            for(int j=0;j<arrayOfWords.size();j++){
+                if(changedArrayOfWords.get(i).equals(arrayOfWords.get(j))){
+                    counter++;
+                }
+            }
+            System.out.println(changedArrayOfWords.get(i) + " " + counter);
+        }
     }
 
     public void reverse() {
@@ -58,24 +76,56 @@ public class TextCommands {
     }
 
     public void countDistinct() {
-
+        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        Set<String> uniqueSet = new LinkedHashSet<String>();
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            uniqueSet.add(changedArrayOfWords.get(i));
+        }
+        System.out.println(uniqueSet.size());
 
     }
 
     public void sort() {
-        //need to add new ArrayList (copy) and make changing in the new one
-        Collections.sort(arrayOfWords);
-        for(int i=0;i<wordPositionToAdd;i++) {
-            System.out.println(arrayOfWords.get(i));
+        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        Set<String> uniqueSet = new LinkedHashSet<String>();
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            uniqueSet.add(changedArrayOfWords.get(i));
+        }
+        changedArrayOfWords.clear();
+        changedArrayOfWords.addAll(uniqueSet);
+        Collections.sort(changedArrayOfWords);
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            System.out.println(changedArrayOfWords.get(i));
         }
     }
 
     public void sortDesc() {
 
+        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        Set<String> uniqueSet = new LinkedHashSet<String>();
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            uniqueSet.add(changedArrayOfWords.get(i));
+        }
+        changedArrayOfWords.clear();
+        changedArrayOfWords.addAll(uniqueSet);
+        Collections.sort(changedArrayOfWords);
+        for (int i = changedArrayOfWords.size() -1 ; i >= 0; i--) {
+            System.out.println(changedArrayOfWords.get(i));
+        }
     }
 
     public void sortBySize() {
-
+        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        Set<String> uniqueSet = new LinkedHashSet<String>();
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            uniqueSet.add(changedArrayOfWords.get(i));
+        }
+        changedArrayOfWords.clear();
+        changedArrayOfWords.addAll(uniqueSet);
+        Collections.sort(changedArrayOfWords);
+        for (int i = 0; i < changedArrayOfWords.size(); i++) {
+            System.out.println(changedArrayOfWords.get(i));
+        }
     }
 
     public void end() {
