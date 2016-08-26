@@ -1,3 +1,5 @@
+package com;
+
 import javax.management.ObjectName;
 import java.io.*;
 import java.lang.reflect.Array;
@@ -5,6 +7,7 @@ import java.util.*;
 
 public class TextCommands {
     String task;
+    // Arraylist add all strings push to 1 string a
     String[] text = new String[10];
     int quantityOfStrings;
     int wordPositionToAdd = 0;
@@ -13,12 +16,13 @@ public class TextCommands {
     int elementPos = 0;
 
     TextCommands(String command, int stringsNumber, String[] text1) {
+        //delete first param in constructor
         task = command;
         quantityOfStrings = stringsNumber;
         text = text1;
         String[] subString;
 
-        for (int stringNumber = 1; stringNumber < quantityOfStrings + 1; stringNumber++) {
+        for (int stringNumber = 0; stringNumber < quantityOfStrings ; stringNumber++) {
             StringTokenizer token = new StringTokenizer(text[stringNumber]);
             while (token.hasMoreTokens()) {
                 arrayOfWords.add(token.nextToken());
@@ -27,18 +31,6 @@ public class TextCommands {
         }
     }
 
-    public void count() {
-        int numberOfWords = 0;
-        for (int stringNumber = 1; stringNumber < quantityOfStrings + 1; stringNumber++) {
-            for (int symbol = 0; symbol < text[stringNumber].length(); symbol++) {
-                if (text[stringNumber].toCharArray()[symbol] == ' ') {
-                    numberOfWords++;
-                }
-            }
-            numberOfWords++;
-        }
-        System.out.println("Quantity of words:" + numberOfWords + "\n");
-    }
 
     public void groupCount() {
         ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
@@ -61,8 +53,6 @@ public class TextCommands {
     }
 
     public void reverse() {
-        System.out.println("Reverse text: ");
-
         for (int stringNumber = 1; stringNumber < quantityOfStrings + 1; stringNumber++) {
             String[] str = text[stringNumber].split(" ");
             for (int i = 0; i < str.length; i++) {
@@ -139,16 +129,10 @@ public class TextCommands {
         }
     }
 
-    public void end() {
-//question
-    }
 
 
     public void makeTask(String command) {
         switch (command) {
-            case "count":
-                count();
-                break;
             case "groupCount":
                 groupCount();
                 break;
@@ -166,9 +150,6 @@ public class TextCommands {
                 break;
             case "sortDesc":
                 sortDesc();
-                break;
-            case "end":
-                end();
                 break;
 
 
