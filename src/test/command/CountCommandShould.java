@@ -1,42 +1,40 @@
 package test.command;
 
-import com.Text;
-import com.command.Command;
-import com.command.Count;
+import com.TextCommands;
 import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 
 public class CountCommandShould {
     @Test
-    public void count_words_correctly_1() {
-        String[] text = new String[2];
-        text[0] = "qw ew wrefd";
-        text[1] = "skwisjn dejndeuj diejdue k";
-        Text text1 = new Text(text);
-        Command countCommand = new Count(text1);
-        countCommand.execute();
-        assertEquals(7,text1.getWordCounter());
+    public void countWordsOneWord() {
+        String[] text = new String[1];
+        text[0] = "london";
+        TextCommands textCommands = new TextCommands("count", 1, text);
+        assertEquals(1, textCommands.count());
     }
 
     @Test
-    public void count_words_correctly_2() {
-        String[] text = new String[2];
-        text[0] = "fdhj ruyf eijf otg nd";
-        text[1] = "qwuyd";
-        Text text1 = new Text(text);
-        Command countCommand = new Count(text1);
-        countCommand.execute();
-        assertEquals(6,text1.getWordCounter());
+    public void countWordsSeveralWords() {
+        String[] text = new String[1];
+        text[0] = "london is the capital of great britain all programmers love cats";
+        TextCommands textCommands = new TextCommands("count", 1, text);
+        assertEquals(11, textCommands.count());
     }
 
     @Test
-    public void count_words_correctly_3() {
-        String[] text = new String[2];
-        text[0] = "qw ew wrefd";
-        text[1] = "abcdngh";
-        Text text1 = new Text(text);
-        Command countCommand = new Count(text1);
-        countCommand.execute();
-        assertEquals(4,text1.getWordCounter());
+    public void countWordsEmptyString() {
+        String[] text = new String[1];
+        text[0] = "";
+        TextCommands textCommands = new TextCommands("count", 1, text);
+        assertEquals(0, textCommands.count());
+    }
+
+    @Test
+    public void countWordsWithThreeSpaces() {
+        String[] text = new String[1];
+        text[0] = "london   is";
+        TextCommands textCommands = new TextCommands("count", 1, text);
+        assertEquals(2, textCommands.count());
     }
 }
