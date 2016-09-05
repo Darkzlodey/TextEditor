@@ -31,7 +31,7 @@ public class SortBySizeCommandShould {
         text = "";
         TextCommands textCommands = new TextCommands();
         TextCommands.setText(text);
-        assertEquals("[]", textCommands.reverse().toString());
+        assertEquals("[]", textCommands.sortBySize().toString());
     }
 
 }
