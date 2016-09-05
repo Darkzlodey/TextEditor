@@ -7,42 +7,28 @@ import java.util.*;
 
 public class TextCommands {
     String task;
-    static String[] text = new String[10];
-    static int quantityOfStrings;
-    int wordPositionToAdd = 0;
-    ArrayList<String> arrayOfWords = new ArrayList<String>();
+    static String text = new String();
     int[] numberOfWords;
     int elementPos = 0;
-
-    public TextCommands(String command, int stringsNumber, String[] text1) {
-        task = command;
-        quantityOfStrings = stringsNumber;
-        text = text1;
-        String[] subString;
-
-        for (int stringNumber = 0; stringNumber < quantityOfStrings; stringNumber++) {
-            StringTokenizer token = new StringTokenizer(text[stringNumber]);
+public static void setText(String text1){
+    text=text1;
+}
+    private static ArrayList<String> CreateArrayOfWords() {
+        ArrayList<String> arrayOfWords = new ArrayList<String>();
+            StringTokenizer token = new StringTokenizer(text);
             while (token.hasMoreTokens()) {
                 arrayOfWords.add(token.nextToken());
-                wordPositionToAdd++;
-            }
         }
+        return arrayOfWords;
     }
 
     public static int count() {
-        int numberOfWords = 0;
-        for (int stringNumber = 0; stringNumber < quantityOfStrings; stringNumber++) {
-            StringTokenizer token = new StringTokenizer(text[stringNumber]);
-            while (token.hasMoreTokens()) {
-                token.nextToken();
-                numberOfWords++;
-            }
-        }
-        return numberOfWords;
+        ArrayList<String> arrayOfWords = CreateArrayOfWords();
+        return arrayOfWords.size();
     }
 
-    public void groupCount() {
-        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+    public  ArrayList<String> groupCount() {
+        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -52,32 +38,31 @@ public class TextCommands {
         int wordsCounter;
         for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
             wordsCounter = 0;
-            for (int position2 = 0; position2 < arrayOfWords.size(); position2++) {
-                if (changedArrayOfWords.get(position1).equals(arrayOfWords.get(position2))) {
+            for (int position2 = 0; position2 < changedArrayOfWords.size(); position2++) {
+                if (changedArrayOfWords.get(position1).equals(changedArrayOfWords.get(position2))) {
                     wordsCounter++;
                 }
             }
-            System.out.println(changedArrayOfWords.get(position1) + " " + wordsCounter);
+            String subString = changedArrayOfWords.get(position1);
+            subString.concat(String.valueOf(wordsCounter));
+            changedArrayOfWords.set(position1,subString);
         }
+        return changedArrayOfWords;
     }
 
-    public void reverse() {
-        System.out.println("Reverse text: ");
-
-        for (int stringNumber = 1; stringNumber < quantityOfStrings + 1; stringNumber++) {
-            String[] str = text[stringNumber].split(" ");
-            for (int i = 0; i < str.length; i++) {
-                StringBuilder word = new StringBuilder();
-                word.append(str[i]);
-                word = word.reverse();
-                System.out.print(word + " ");
-            }
-            System.out.println();
+    public ArrayList<String> reverse() {
+        ArrayList<String> arrayOfWords = CreateArrayOfWords();
+        for (int i = 0; i < arrayOfWords.size(); i++) {
+            StringBuilder word = new StringBuilder();
+            word.append(arrayOfWords.get(i));
+            word = word.reverse();
+            arrayOfWords.set(i, word.toString());
         }
+        return arrayOfWords;
     }
 
     public void countDistinct() {
-        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -86,8 +71,8 @@ public class TextCommands {
 
     }
 
-    public void sort() {
-        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+    public ArrayList<String> sort() {
+        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -95,14 +80,11 @@ public class TextCommands {
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
         Collections.sort(changedArrayOfWords);
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            System.out.println(changedArrayOfWords.get(position));
-        }
+        return changedArrayOfWords;
     }
 
-    public void sortDesc() {
-
-        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+    public ArrayList<String> sortDesc() {
+        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -110,13 +92,12 @@ public class TextCommands {
         changedArrayOfWords.clear();
         changedArrayOfWords.addAll(uniqueSet);
         Collections.sort(changedArrayOfWords);
-        for (int position = changedArrayOfWords.size() - 1; position >= 0; position--) {
-            System.out.println(changedArrayOfWords.get(position));
-        }
+        Collections.reverse(changedArrayOfWords);
+        return changedArrayOfWords;
     }
 
-    public void sortBySize() {
-        ArrayList<String> changedArrayOfWords = new ArrayList<String>(arrayOfWords);
+    public ArrayList<String> sortBySize() {
+        ArrayList<String> changedArrayOfWords =CreateArrayOfWords();
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -127,17 +108,14 @@ public class TextCommands {
         String bufer;
         for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
             for (int position2 = 0; position2 < changedArrayOfWords.size() - 1; position2++) {
-                if (changedArrayOfWords.get(position1).length() > changedArrayOfWords.get(position2).length()) {
+                if (changedArrayOfWords.get(position1).length() < changedArrayOfWords.get(position2).length()) {
                     bufer = changedArrayOfWords.get(position2);
-                    changedArrayOfWords.get(position2).equals(changedArrayOfWords.get(position1));
-                    changedArrayOfWords.get(position1).equals(bufer);
+                    changedArrayOfWords.set((position2),changedArrayOfWords.get(position1));
+                    changedArrayOfWords.set((position1), bufer);
                 }
             }
         }
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-
-            System.out.println(changedArrayOfWords.get(position));
-        }
+        return changedArrayOfWords;
     }
 
     public void makeTask(String command) {
