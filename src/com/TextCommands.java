@@ -1,19 +1,10 @@
 package com;
 
-import javax.management.ObjectName;
-import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class TextCommands {
-    String task;
-    static String text = new String();
-    int[] numberOfWords;
-    int elementPos = 0;
-public static void setText(String text1){
-    text=text1;
-}
-    private static ArrayList<String> CreateArrayOfWords() {
+
+    private static ArrayList<String> createArrayOfWords(String text) {
         ArrayList<String> arrayOfWords = new ArrayList<String>();
             StringTokenizer token = new StringTokenizer(text);
             while (token.hasMoreTokens()) {
@@ -22,13 +13,12 @@ public static void setText(String text1){
         return arrayOfWords;
     }
 
-    public static int count() {
-        ArrayList<String> arrayOfWords = CreateArrayOfWords();
-        return arrayOfWords.size();
+    public static int count(String text) {
+        return createArrayOfWords(text).size();
     }
 
-    public  ArrayList<String> groupCount() {
-        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
+    public static ArrayList<String> groupCount(String text) {
+        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -50,8 +40,8 @@ public static void setText(String text1){
         return changedArrayOfWords;
     }
 
-    public ArrayList<String> reverse() {
-        ArrayList<String> arrayOfWords = CreateArrayOfWords();
+    public static ArrayList<String> reverse(String text) {
+        ArrayList<String> arrayOfWords = createArrayOfWords(text);
         for (int i = 0; i < arrayOfWords.size(); i++) {
             StringBuilder word = new StringBuilder();
             word.append(arrayOfWords.get(i));
@@ -61,8 +51,8 @@ public static void setText(String text1){
         return arrayOfWords;
     }
 
-    public void countDistinct() {
-        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
+    public static void countDistinct(String text) {
+        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -71,8 +61,8 @@ public static void setText(String text1){
 
     }
 
-    public ArrayList<String> sort() {
-        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
+    public static ArrayList<String> sort(String text) {
+        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -83,8 +73,8 @@ public static void setText(String text1){
         return changedArrayOfWords;
     }
 
-    public ArrayList<String> sortDesc() {
-        ArrayList<String> changedArrayOfWords = CreateArrayOfWords();
+    public static ArrayList<String> sortDesc(String text) {
+        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -96,8 +86,8 @@ public static void setText(String text1){
         return changedArrayOfWords;
     }
 
-    public ArrayList<String> sortBySize() {
-        ArrayList<String> changedArrayOfWords =CreateArrayOfWords();
+    public static ArrayList<String> sortBySize(String text) {
+        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
         Set<String> uniqueSet = new LinkedHashSet<String>();
         for (int position = 0; position < changedArrayOfWords.size(); position++) {
             uniqueSet.add(changedArrayOfWords.get(position));
@@ -118,28 +108,28 @@ public static void setText(String text1){
         return changedArrayOfWords;
     }
 
-    public void makeTask(String command) {
+    public void makeTask(String command, String text) {
         switch (command) {
             case "count":
-                count();
+                count(text);
                 break;
             case "groupCount":
-                groupCount();
+                groupCount(text);
                 break;
             case "reverse":
-                reverse();
+                reverse(text);
                 break;
             case "countDistinct":
-                countDistinct();
+                countDistinct(text);
                 break;
             case "sort":
-                sort();
+                sort(text);
                 break;
             case "sortBySize":
-                sortBySize();
+                sortBySize(text);
                 break;
             case "sortDesc":
-                sortDesc();
+                sortDesc(text);
                 break;
         }
     }

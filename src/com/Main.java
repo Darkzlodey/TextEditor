@@ -14,8 +14,7 @@ public class Main {
             System.out.println("Type co, number of strings and text");
             command = sc.nextLine();
                 text = sc.nextLine();
-            textEditor.setText(text);
-            textEditor.makeTask(command);
+            textEditor.makeTask(command , text);
         }
 
     }

@@ -8,38 +8,25 @@ import static org.junit.Assert.assertEquals;
 public class CountCommandShould {
     @Test
     public void countWordsOneWord() {
-        String text = new String();
-        text = "london";
-
-        TextCommands textCommands = new TextCommands();
-        TextCommands.setText(text);
-        assertEquals(1, textCommands.count());
+        String text = new String("london");
+        assertEquals(1, TextCommands.count(text));
     }
 
     @Test
     public void countWordsSeveralWords() {
-        String text = new String();
-        text = "london is the capital of great britain all programmers love cats";
-        TextCommands textCommands = new TextCommands();
-        TextCommands.setText(text);
-        assertEquals(11, textCommands.count());
+        String text = new String("london is the capital of great britain all programmers love cats");
+        assertEquals(11,TextCommands.count(text));
     }
 
     @Test
     public void countWordsEmptyString() {
-        String text = new String();
-        text = "";
-        TextCommands textCommands = new TextCommands();
-        TextCommands.setText(text);
-        assertEquals(0, textCommands.count());
+        String text = new String("");
+        assertEquals(0, TextCommands.count(text));
     }
 
     @Test
     public void countWordsWithThreeSpaces() {
-        String text = new String();
-        text = "london   is";
-        TextCommands textCommands = new TextCommands();
-        TextCommands.setText(text);
-        assertEquals(2, textCommands.count());
+        String text = new String("london is");
+        assertEquals(2, TextCommands.count(text));
     }
 }
