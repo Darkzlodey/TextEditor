@@ -1,43 +1,32 @@
 package com;
 
 import java.util.*;
+import java.util.stream.Stream;
+
 
 public class TextCommands {
 
     private static ArrayList<String> createArrayOfWords(String text) {
         ArrayList<String> arrayOfWords = new ArrayList<String>();
-            StringTokenizer token = new StringTokenizer(text);
-            while (token.hasMoreTokens()) {
-                arrayOfWords.add(token.nextToken());
+        StringTokenizer token = new StringTokenizer(text);
+        while (token.hasMoreTokens()) {
+            arrayOfWords.add(token.nextToken());
         }
         return arrayOfWords;
     }
 
-    public static int count(String text) {
-        return createArrayOfWords(text).size();
+    public static long count(String text) {
+        return createArrayOfWords(text).stream().count();
     }
 
-    public static ArrayList<String> groupCount(String text) {
+    //----------------------
+    public static Object[] groupCount(String text) {
         ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
-        Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            uniqueSet.add(changedArrayOfWords.get(position));
-        }
-        changedArrayOfWords.clear();
-        changedArrayOfWords.addAll(uniqueSet);
-        int wordsCounter;
-        for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
-            wordsCounter = 0;
-            for (int position2 = 0; position2 < changedArrayOfWords.size(); position2++) {
-                if (changedArrayOfWords.get(position1).equals(changedArrayOfWords.get(position2))) {
-                    wordsCounter++;
-                }
-            }
-            String subString = changedArrayOfWords.get(position1);
-            subString.concat(String.valueOf(wordsCounter));
-            changedArrayOfWords.set(position1,subString);
-        }
-        return changedArrayOfWords;
+      /*  for (int position = 0; position < changedArrayOfWords.size(); position++) {
+            long numberOfWords = changedArrayOfWords.stream().filter(changedArrayOfWords.get(position)::equals).count();
+            changedArrayOfWords.stream().skip(position)
+        }*/
+        return changedArrayOfWords.stream().toArray();
     }
 
     public static ArrayList<String> reverse(String text) {
@@ -51,71 +40,36 @@ public class TextCommands {
         return arrayOfWords;
     }
 
-    public static void countDistinct(String text) {
-        ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
-        Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            uniqueSet.add(changedArrayOfWords.get(position));
-        }
-        System.out.println(uniqueSet.size());
-
+    public static long countDistinct(String text) {
+        return createArrayOfWords(text).stream().distinct().count();
     }
 
-    public static ArrayList<String> sort(String text) {
+    public static Object[] sort(String text) {
         ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
-        Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            uniqueSet.add(changedArrayOfWords.get(position));
-        }
-        changedArrayOfWords.clear();
-        changedArrayOfWords.addAll(uniqueSet);
-        Collections.sort(changedArrayOfWords);
-        return changedArrayOfWords;
+        return changedArrayOfWords.stream().distinct().sorted().toArray();
     }
 
-    public static ArrayList<String> sortDesc(String text) {
+    public static Object[] sortDesc(String text) {
         ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
-        Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            uniqueSet.add(changedArrayOfWords.get(position));
-        }
-        changedArrayOfWords.clear();
-        changedArrayOfWords.addAll(uniqueSet);
-        Collections.sort(changedArrayOfWords);
-        Collections.reverse(changedArrayOfWords);
-        return changedArrayOfWords;
+        return changedArrayOfWords.stream().distinct().sorted((e1, e2) -> e2.compareTo(e1)).toArray();
     }
 
-    public static ArrayList<String> sortBySize(String text) {
+    //--------------------
+    public static Object[] sortBySize(String text) {
         ArrayList<String> changedArrayOfWords = createArrayOfWords(text);
-        Set<String> uniqueSet = new LinkedHashSet<String>();
-        for (int position = 0; position < changedArrayOfWords.size(); position++) {
-            uniqueSet.add(changedArrayOfWords.get(position));
-        }
-        changedArrayOfWords.clear();
-        changedArrayOfWords.addAll(uniqueSet);
-        Collections.sort(changedArrayOfWords);
-        String bufer;
-        for (int position1 = 0; position1 < changedArrayOfWords.size(); position1++) {
-            for (int position2 = 0; position2 < changedArrayOfWords.size() - 1; position2++) {
-                if (changedArrayOfWords.get(position1).length() < changedArrayOfWords.get(position2).length()) {
-                    bufer = changedArrayOfWords.get(position2);
-                    changedArrayOfWords.set((position2),changedArrayOfWords.get(position1));
-                    changedArrayOfWords.set((position1), bufer);
-                }
-            }
-        }
-        return changedArrayOfWords;
+        //changedArrayOfWords.stream().distinct().sorted((e1,e2) ->  );
+        return changedArrayOfWords.stream().toArray();
     }
+
 
     public void makeTask(String command, String text) {
         switch (command) {
             case "count":
                 count(text);
-                break;
+                break;/*
             case "groupCount":
                 groupCount(text);
-                break;
+                break;*/
             case "reverse":
                 reverse(text);
                 break;
@@ -124,14 +78,14 @@ public class TextCommands {
                 break;
             case "sort":
                 sort(text);
-                break;
+                break;/*
             case "sortBySize":
                 sortBySize(text);
-                break;
+                break;*/
             case "sortDesc":
                 sortDesc(text);
                 break;
         }
     }
-
 }
+

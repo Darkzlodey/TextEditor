@@ -23,5 +23,4 @@ public class ReverseCommandShould {
         String text = new String("");
         assertEquals("[]", TextCommands.reverse(text).toString());
     }
-
 }
